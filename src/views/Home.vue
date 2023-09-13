@@ -39,7 +39,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "HomeView",
   mounted() {
-    let wrapper = this.$refs.main;
+    const wrapper = this.$refs.main;
     const trg = this.$refs.innerContent
     let totalWidth = trg.scrollWidth - window.innerWidth;
     gsap.to(trg, {
