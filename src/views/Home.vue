@@ -47,7 +47,7 @@ export default {
       scrollTrigger: {
         trigger: wrapper,
         start: 'top center',
-        end: 'bottom 50%',
+        end: totalWidth,
         scrub: 2,
         pin: true
       }
