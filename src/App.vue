@@ -10,6 +10,9 @@ export default {
 };
 </script>
 <style lang="scss">
+html{
+  overflow-x: hidden;
+}
 #app {
   font-family: "Bebas Neue", sans-serif;
   font-family: "Ubuntu", sans-serif;

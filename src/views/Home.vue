@@ -1,8 +1,12 @@
 <template>
   <main>
     <section class="section">
-      <h1>Basic ScrollTrigger in VueJS</h1>
-      <h2 class="title">Scroll down to see the magic happen!!</h2>
+      <div class="ticker">
+        <div class="text-wrap" ref="textWrap">
+          <div class="text">Бегущая строка текста...</div>
+          <div class="text">Бегущая строка текста...</div>
+        </div>
+      </div>
     </section>
     <section class="section boxWrp" ref="main">
       <div class="innerContent" ref="innerContent">
@@ -40,32 +44,30 @@ export default {
   name: "HomeView",
   mounted() {
     const wrapper = this.$refs.main;
-    const trg = this.$refs.innerContent
+    const trg = this.$refs.innerContent;
     let totalWidth = trg.scrollWidth - window.innerWidth;
     gsap.to(trg, {
       x: -totalWidth * 0.5,
       scrollTrigger: {
         trigger: wrapper,
-        start: 'top center',
+        start: "top center",
         end: totalWidth,
         scrub: 2,
-        pin: true
-      }
-    })
-    // let boxes = wrapper.querySelectorAll(".box");
-    // let totalWidth = boxes.length * window.innerWidth; // общая ширина всех блоков
+        pin: true,
+      },
+    });
 
-    // gsap.to(wrapper, {
-    //   x: `-=${totalWidth - window.innerWidth}`, // смещение на общую ширину минус ширина одного блока
-    //   scrollTrigger: {
-    //     trigger: wrapper,
-    //     pin: true, // "закрепить" блок на месте
-    //     start: "top top",
-    //     end: `+=${totalWidth}`,
-    //     scrub: true,
-    //     invalidateOnRefresh: true,
-    //   },
-    // });
+    const textWrap = this.$refs.textWrap;
+    const textWidth = textWrap.firstElementChild.offsetWidth;
+
+    gsap.set(textWrap, { x: 0 });
+    gsap.to(textWrap, {
+      x: -textWidth,
+      repeat: -1,
+      ease: "linear",
+      duration: 5,
+    });
+
   },
 };
 </script>
@@ -80,7 +82,7 @@ export default {
   width: 100%;
   height: 20vh;
 }
-.innerContent{
+.innerContent {
   width: 100%;
   height: 100%;
   display: flex;
@@ -91,5 +93,23 @@ export default {
   height: 400px;
   background-color: #91b946;
   flex-shrink: 0;
+}
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100vw;
+  position: relative;
+}
+
+.text-wrap {
+  display: flex;
+  width: 100%;
+  font-size: 220px;
+}
+
+.text {
+  white-space: nowrap;
+  display: inline-block;
+  // width: 100vw;
 }
 </style>
